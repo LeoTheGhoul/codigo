@@ -1,0 +1,129 @@
+#: import SlideTransition kivy.uix.screenmanager.SlideTransition
+#: import RiseInTransition kivy.uix.screenmanager.RiseInTransition
+
+<ElementCard@MDCard>:
+    radius: '10dp'
+    spacing: '10dp'
+    padding: '10dp'
+    image: ''
+    text: ''
+    sub_text: ''
+    orientation: 'vertical'
+    ripple_behavior: True
+    on_release:
+        app.root.transition = RiseInTransition()
+    Image:
+        source: root.image
+        halign: 'center'
+    MDBoxLayout:
+        orientation: 'vertical'
+        MDLabel:
+            halign: 'center'
+            text: root.text
+        MDLabel:
+            halign: 'center'
+            text: root.sub_text
+
+<CustomizeScreen@MDBoxLayout>:
+    orientation: 'vertical'
+    text: ''
+    padding: 100
+    MDLabel:
+        text: root.text
+        halign: 'center'
+        pos_hint: {'center_x':.5}
+    MDFillRoundFlatButton:
+        text: 'Atras'
+        pos_hint: {'center_x':.5}
+        on_release:
+            app.root.current = 'screen_principal'
+            app.root.transition = SlideTransition(direction= 'left')
+
+####################################################################
+<Ui>:
+    MDScreen:
+        name: 'screen_principal'
+        md_bg_color: 0, .5,.5,1
+        MDBoxLayout:
+            orientation: 'vertical'
+            MDBoxLayout:
+                size_hint: 1,0.2
+                orientation: 'horizontal'
+                padding: '10dp'
+                MDCard:
+                    radius: '10dp'
+                    padding: '20dp'
+                    line_color: 1,0,1,1
+
+                    MDLabel:
+                        text: 'Bienvenido a SIT'
+                        halign: 'center'
+                        pos_hint: {'center_y': 0.5}
+
+                    MDSwitch:
+                        pos_hint: {'center_y': 0.5}
+                        on_active:
+                            app.change_style(*args) #cambiar estilo
+
+            MDGridLayout:
+                cols: 3
+                spacing: '10dp'
+                size_hint: 1,.8
+                padding: ['10dp','10dp','10dp','10dp']
+
+                ElementCard:
+                    text: 'Informacion basica'
+                    sub_text: '¿Que son los Impuestos?'
+                    image: ('images/qs.png')
+                    on_release: root.current = 'screen1'
+                ElementCard:
+                    text: 'De que se encargan'
+                    sub_text: '¿Para que sirven los impuestos?'
+                    image: 'images/pq.png'
+                    on_release: root.current = 'screen2'
+                ElementCard:
+                    text: '¿Debo pagar impuestos por...?'
+                    sub_text: '¿Por que pagar impuestos'
+                    image: 'images/pipipi.png'
+                    on_release: root.current= 'screen3'
+                ElementCard:
+                    text: 'SAT'
+                    sub_text: '¿Quien se encarga de recaudar los impuestos?'
+                    image: 'images/sat.png'
+                    on_release: root.current= 'screen4'
+                ElementCard:
+                    text: 'Consecuencias de no pagar'
+                    sub_text: '¿Que pasa si no pago impuestos?'
+                    image: 'images/security.png'
+                    on_release: root.current= 'screen5'
+                ElementCard:
+                    text: 'Regularizacion empresarial'
+                    sub_text: '¿Como regulo mi empresa?'
+                    image: 'images/reg.png'
+                    on_release: root.current= 'screen6'
+    MDScreen:
+        name: 'screen1'
+        CustomizeScreen:
+            text: 'El impuesto es una clase de tributo (obligaciones generalmente pecuniarias en favor del acreedor tributario) regido por derecho público, que se caracteriza por no requerir una contraprestación directa o determinada por parte de la administración hacendaria (acreedor tributario). En la mayoría de legislaciones, los impuestos surgen exclusivamente por la “potestad tributaria del Estado” el que se constituye en el acreedor. Generalmente los impuestos son cargas obligatorias para las personas y empresas. Un principio rector, denominado “capacidad contributiva”, sugiere que quienes más tienen deben aportar en mayor medida al financiamiento estatal, para consagrar el principio constitucional de equidad y el principio social de la libertad.'
+    MDScreen:
+        name: 'screen2'
+        CustomizeScreen:
+            text: 'La recaudación de los impuestos se destina a la satisfacción de ciertas necesidades de carácter colectivo como: la educación pública, la impartición de justicia, la seguridad, los hospitales públicos, la infraestructura y servicios de vías públicas, programas y proyectos de apoyo al desarrollo social y económico, necesidades que por separado cada persona no podría pagar por sí sola, pero que, en cambio, se pueden atender con las aportaciones de todos. Estos servicios ocasionan gastos y gracias a nuestras contribuciones la Federación cuenta con los recursos necesarios para: disponer de escuelas con profesores que contribuyan en tu enseñanza; disfrutar de bibliotecas, hospitales y centros deportivos; el mantenimiento de las calles de la ciudad en la que vivimos y su iluminación; para construir y arreglar las carreteras; para contar con un servicio de bomberos, policías y militares, que se ocupen de mantener nuestra seguridad.'
+    MDScreen:
+        name: 'screen3'
+        CustomizeScreen:
+            text: 'Los impuestos son importantes porque el estado puede obtener los recursos para brindar, educación, salud seguridad, justicia, obras públicas, combate a la pobreza y el impulso a los sectores económicos que son fundamentales para el crecimiento de la economía del país, el estado debe de buscar la igualdad de oportunidades contribuir con el bienestar de los demás que es una forma de participar en los asuntos de la comunidad, en este sentido es notorio que prácticamente toda la población, utiliza en alguna medida las obras y acciones que hace el estado con la recaudación de impuestos de la misma forma que a nadie le gusta pagar la contribución.'
+    MDScreen:
+        name: 'screen4'
+        CustomizeScreen:
+            text: 'El Servicio de Administración Tributaria (SAT) es un órgano administrativo desconcentrado de la Secretaría de Hacienda y Crédito Público (SHCP). Es la máxima autoridad fiscal responsable del cobro de impuestos en México. Administra el Registro Federal de Contribuyentes (RFC) en la que cada persona moral o física mayor de dieciocho años tiene la obligación de registrarse para contribuir de forma equitativa al presupuesto público. Asimismo, genera y proporciona la información necesaria para la planificación, evaluación y ejecución de las políticas públicas en materia tributaria.'
+    MDScreen:
+        name: 'screen5'
+        CustomizeScreen:
+            text: 'El SAT solicita el pago de impuestos a las personas morales de la siguiente manera: Carta invitación: envía un mensaje de texto o correo electrónico al contribuyente para invitarlo a ponerse al corriente, ya que de no hacerlo se puede hacer acreedor a penalizaciones económicas como recargos (intereses moratorios), actualizaciones (incremento que sufre un adeudo por la inflación) y multas (penalización por cada obligación fiscal no presentada). Multa: si no se atienden las cartas invitación, el SAT procede a aplicar directamente una multa, por lo que el acumulado de pagos sería: impuesto corriente, recargos, actualizaciones y multa. Bloqueo de cuentas o embargos: si el negocio sigue teniendo actividad comercial, es decir, que entra dinero a sus cuentas, el SAT las interviene y las congela para evitar que se sigan realizando cobros y pagos. De igual forma, se pueden embargar algunos bienes para retener el pago del adeudo.'
+    MDScreen:
+        name: 'screen6'
+        CustomizeScreen:
+            text: 'El Servicio de Administración Tributaria busca que el contribuyente pague los impuestos que no ha declarado en una sola exhibición; sin embargo, la deuda se puede negociar para que quede liquidada en alguna de las siguientes modalidades:\n Pago único: a través de una institución bancaria se puede realizar el pago de la deuda total, o bien, con cheques o efectivo.\n Pago en parcialidades: se debe realizar un pago inicial del 20% del monto total del adeudo. Las mensualidades son fijas e incrementarán por la tasa de interés de acuerdo al número de meses solicitados. Tasa de 1%: de 1 a 12 mensualidades; de 1.25%: de 13 a 24 mensualidades; de 1.5%: de 25 y hasta 36 mensualidades.\n Con bienes embargados: si el SAT embargó algunos de los bienes de la Empresa, el pago se puede realizar con el dinero que se obtenga del remate, siempre y cuando su valor corresponda al monto adeudado.'
+
+    
